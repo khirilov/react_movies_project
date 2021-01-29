@@ -7,14 +7,18 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 class Main extends Component {
   state = {
-    movies: [`http://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`],
+    movies: [`https://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`],
     loading: true,
   };
 
   componentDidMount() {
-    fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`)
+    fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`)
       .then((response) => response.json())
-      .then((data) => this.setState({ movies: data.Search, loading: false }));
+      .then((data) => this.setState({ movies: data.Search, loading: false }))
+      .catch((err) => {
+        console.error(err);
+        this.setState({ loading: false });
+      });
   }
 
   searchMovies = (str, type = "all") => {
@@ -25,7 +29,11 @@ class Main extends Component {
       }`
     )
       .then((response) => response.json())
-      .then((data) => this.setState({ movies: data.Search, loading: false }));
+      .then((data) => this.setState({ movies: data.Search, loading: false }))
+      .catch((err) => {
+        console.error(err);
+        this.setState({ loading: false });
+      });
   };
   render() {
     const { movies, loading } = this.state;
