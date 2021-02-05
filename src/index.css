@@ -54,3 +54,14 @@ body {
   label:not(:last-child) {
     margin-right: 1rem;
   }
+  .input-field input[type=search]:focus:not(.browser-default) {
+    border-bottom:  1px solid #ffffff ;
+    background-color: #212121;
+  }
+
+  @media only screen and (max-width: 480px) {
+    nav .brand-logo {
+      font-size: 1.5rem;
+      position: relative;
+    }
+  }
